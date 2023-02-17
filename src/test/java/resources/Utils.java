@@ -20,12 +20,12 @@ import io.restassured.specification.ResponseSpecification;
 public class Utils {
 	public static RequestSpecification req;
 	ResponseSpecification res;
-
+    
 	public RequestSpecification requestSpecification() throws IOException {
 		if (req == null) {
 
 			PrintStream stream = new PrintStream(new FileOutputStream("logging.txt"));
-			req = new RequestSpecBuilder().setBaseUri("https://rahulshettyacademy.com")
+			req = new RequestSpecBuilder().setBaseUri(getGlobalValue("baseUrl"))
 					.addQueryParam("key", "qaclick123").addFilter(RequestLoggingFilter.logRequestTo(stream))
 					.addFilter(ResponseLoggingFilter.logResponseTo(stream)).setContentType(ContentType.JSON).build();
 			return req;
